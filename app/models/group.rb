@@ -15,8 +15,7 @@ class Group < ApplicationRecord
   validates :name, uniqueness: true
   validates :name, :group_type, :status, presence: true
 
-  enum status: [ :active, :archived, :removed, :permanently_removed], _default: 'active'
-
+  enum status: [ :active, :archived, :removed, :permanently_removed ], _default: 'active'
 
   def banned_users_emails
     banned_users.pluck(:email)
@@ -26,7 +25,7 @@ class Group < ApplicationRecord
     active_users.count
   end
 
-  def add_user_to_ban(user)
-    user.status = 'unactive'
+  def add_user_to_ban(user_id)
+    memberships.find_by(user_id: user_id)&.update(status: :banned)
   end
 end

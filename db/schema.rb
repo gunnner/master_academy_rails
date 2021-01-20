@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 2021_01_19_220934) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.string "url"
     t.string "imageable_type"
     t.integer "imageable_id"
+    t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
@@ -40,13 +40,13 @@ ActiveRecord::Schema.define(version: 2021_01_19_220934) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "users_id"
     t.string "title"
     t.text "body"
     t.datetime "published_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_posts_on_user_id"
+    t.index ["users_id"], name: "index_posts_on_users_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -6,4 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
+group = Group.create!({ name: "Noobs#{Time.now.to_i}", group_type: 'Not study', status: :active })
+user = User.create!(first_name: "Vanya#{Time.now.to_i}", last_name: 'Petrenkovic', personal_data: { username: 'Van' }, password: 'password2', email: "emaill#{Time.now.to_i}@email.com")
+Membership.create!(user: user, group: group)
