@@ -1,14 +1,18 @@
 class User < ApplicationRecord
-  has_many :posts
-  has_many :images, :as => :imageable
+  VALID_EMAIL = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
 
-  validates :password, :length => { :minimum => 8 }
-  validates :email, :username, :uniqueness => true
-  validates :username, :email, :password, :presence => true
+  has_many :posts, dependent: :destroy
+  has_many :images, as: :imageable
+  has_many :memberships
+  has_many :groups, through: :memberships
 
-  scope :old, -> { where('birthday > ?', 18.years.from_now) }
+  validates :personal_data, uniqueness: true, presence: true
+  validates :email, uniqueness: true, format: { with: VALID_EMAIL }, presence: true
+  validates :password, length: { minimum: 8 }, presence: true
+
+  scope :adults, -> { where('birthday < ?', 18.years.ago) }
 
   def full_name
-    "User fullname is: #{last_name} #{first_name}"
+    "User name is: #{last_name} #{first_name}"
   end
 end
