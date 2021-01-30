@@ -40,13 +40,13 @@ ActiveRecord::Schema.define(version: 2021_01_19_220934) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer "users_id"
+    t.integer "user_id"
     t.string "title"
     t.text "body"
     t.datetime "published_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["users_id"], name: "index_posts_on_users_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,4 +60,5 @@ ActiveRecord::Schema.define(version: 2021_01_19_220934) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "posts", "users"
 end
