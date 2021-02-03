@@ -1,4 +1,9 @@
 <h1>All posts: </h1>
+
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
 <% @posts.each do |post| %>
   <h2><%= post.title %></h2>
   <p class="read"><%= link_to "Read more", post %><p>

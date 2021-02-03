@@ -10,6 +10,11 @@ class PostsController < ApplicationController
 
   def find_post
     @post = Post.find_by(id: params[:id])
+    if @post.nil?
+      @posts = Post.all
+      flash.now[:notice] = "Your post was not found. See a list of available posts:"
+      render action: 'index'
+    end
   end
 
   def post_params
