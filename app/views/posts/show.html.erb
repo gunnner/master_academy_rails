@@ -1,9 +1,10 @@
 <h1><%= @post.title %></h1>
-<p><%= @post.body %></p>
-<small>News update at: <%= @post.updated_at %></small>
-<br><br>
-<%= social_share_button_tag(@post.title) %>
-
-
-<%#= social_share_button_tag(@post.title, 'data-twitter-title' => 'TheTitleForTwitter') %>
-<%#= social_share_button_tag(@post.title, :allow_sites => %w(twitter facebook)) %>
+<p class="post-body"><%= @post.body %></p>
+<div class="container">
+  <div class="social-share-button">
+    <p class="share">Share: </p>
+    <p class="ssb-icon"><%= social_share_button_tag(@post.title, :data => @post.body) %></p>
+  </div>
+  <p class="publish">Published at: <%= @post.published_at.strftime("%Y-%m-%d %H:%M") %></p>
+</div>
+<p class="post-number">Post number: <%= @post.id %></p>

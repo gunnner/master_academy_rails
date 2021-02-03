@@ -1,5 +1,9 @@
-<h2>Posts</h2>
-
-<%#= social_share_button_tag(@post.title) %>
-<%#= social_share_button_tag(@post.title, 'data-twitter-title' => 'TheTitleForTwitter') %>
-<%#= social_share_button_tag(@post.title, :allow_sites => %w(twitter facebook)) %>
+<h1>All posts: </h1>
+<% @posts.each do |post| %>
+  <h2><%= post.title %></h2>
+  <p class="read"><%= link_to "Read more", post %><p>
+  <div class="container">
+    <p class="publish">Published at: <%= post.published_at.strftime("%Y-%m-%d %H:%M") %></p>
+  </div>
+<% end %>
+<p class="total">Total number of posts: <%= @posts.count %> </p>

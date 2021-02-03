@@ -4,6 +4,7 @@ class CreateMemberships < ActiveRecord::Migration[6.0]
       t.integer :status
       t.belongs_to :group
       t.belongs_to :user
+      t.column :status, :string, default: 'unactive'
 
       t.timestamps
     end

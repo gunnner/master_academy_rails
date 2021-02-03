@@ -15,7 +15,7 @@ class Group < ApplicationRecord
   validates :name, uniqueness: true
   validates :name, :group_type, :status, presence: true
 
-  enum status: %i[active archived removed permanently_removed], _default: 'active'
+  enum status: %i[active archived removed permanently_removed]
 
   def banned_users_emails
     banned_users.pluck(:email)

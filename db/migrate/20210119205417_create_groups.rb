@@ -4,6 +4,7 @@ class CreateGroups < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :group_type
       t.integer :status
+      t.column :status, :string, default: 'active'
 
       t.timestamps
     end

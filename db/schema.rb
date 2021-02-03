@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_01_19_220934) do
 
   create_table "images", force: :cascade do |t|
     t.string "imageable_type"
-    t.integer "imageable_id"
+    t.bigint "imageable_id"
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 2021_01_19_220934) do
 
   create_table "memberships", force: :cascade do |t|
     t.integer "status"
-    t.integer "group_id"
-    t.integer "user_id"
+    t.bigint "group_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_memberships_on_group_id"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2021_01_19_220934) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "title"
     t.text "body"
     t.datetime "published_at"
