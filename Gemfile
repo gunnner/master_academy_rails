@@ -10,6 +10,9 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
+
+# gem 'rack-cors', :require => 'rack/cors'
+
 # Use SCSS for stylesheets
 # gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -34,8 +37,11 @@ gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # rake
-gem 'rake', '~> 13.0', '>= 13.0.3'
+# gem 'rake', '~> 13.0', '>= 13.0.3'
 gem 'social-share-button'
+
+gem 'grape'
+gem 'grape-entity'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
