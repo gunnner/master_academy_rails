@@ -11,6 +11,7 @@ module Blog
     #   end
     # end
     namespace :posts do
+
       get do
         Post.all
       end

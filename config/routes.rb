@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # root to: 'posts#index'
   mount Blog::API => '/'
 
-  resources :posts, only: %i[index show]
+  resources :posts#, only: %i[index show]
   get '/users' => 'users#index'
 
 end
