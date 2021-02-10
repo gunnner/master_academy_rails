@@ -44,6 +44,10 @@ module Blog
         requires :published_at, type: String
       end
 
+      post do
+        Post.create!(declared_params)
+      end
+
       resources :images do
         desc 'Create an image'
         params do

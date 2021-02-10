@@ -13,7 +13,6 @@ module Blog
       expose :images, using: Blog::Entities::Image do |post|
         post.user.images
       end
-
     end
   end
 end
