@@ -3,7 +3,7 @@
 <div class="container">
   <div class="social-share-button">
     <p class="share">Share: </p>
-    <p class="ssb-icon"><%= social_share_button_tag(@post.title, :data => @post.body) %></p>
+    <p class="ssb-icon"><%= social_share_button_tag(@post.title, data: @post.body) %></p>
   </div>
   <p class="publish">Published at: <%= @post.published_at.strftime("%Y-%m-%d %H:%M") %></p>
 </div>

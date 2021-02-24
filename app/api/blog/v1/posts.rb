@@ -9,43 +9,45 @@ module Blog
       prefix :api
 
       resources :posts do
-      desc 'Return the list of posts'
+        desc 'Return the list of posts'
         get do
-          posts = Post.published
+          posts = Post.publish
           present posts, with: Blog::Entities::Index
         end
 
-      desc 'Return a specific post'
-      route_param :id do
-        get do
-          post = Post.find(params[:id])
-          present post, with: Blog::Entities::Index
+        desc 'Create a new post'
+        params do
+          requires :title, type: String
+          requires :body, type: String
+          requires :published_at, type: String
         end
-
-      desc 'Update a specific post'
-      route_param :id do
         post do
-          Post.find(params[:id]).update(declared_params)
+          Post.create!(declared_params)
         end
-      end
 
-      desc 'Delete a specific post'
-      route_param :id do
+        route_param :post_id do
+          desc 'Return a specific post'
+          get do
+            post = Post.find(params[:id])
+            present post, with: Blog::Entities::Index
+          end
+
+          desc 'Update a specific post'
+          params do
+            requires :title, type: String
+            requires :body, type: String
+            requires :published_at, type: String
+          end
+          patch do
+            Post.find(params[:id]).update(declared_params)
+          end
+        end
+
+        desc 'Delete a specific post'
         delete do
           post = Post.find(params[:id])
           post.destroy
         end
-      end
-
-      desc 'Create a new post'
-      params do
-        requires :title, type: String
-        requires :body, type: String
-        requires :published_at, type: String
-      end
-
-      post do
-        Post.create!(declared_params)
       end
 
       resources :images do
@@ -61,8 +63,6 @@ module Blog
           @image = @post.images.create!(params[:url])
           @post.update(url: @image.url)
         end
-      end
-      end
       end
     end
   end

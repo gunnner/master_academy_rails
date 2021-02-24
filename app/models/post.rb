@@ -4,12 +4,11 @@ class Post < ApplicationRecord
 
   scope :published, -> { where.not(published_at: nil) }
 
-  def published
+  def publish
     update_attribute(:published_at, DateTime.now)
   end
 
-  def unpublished
+  def unpublish
     update_attribute(:published_at, nil)
   end
-
 end

@@ -2,7 +2,7 @@ class User < ApplicationRecord
   VALID_EMAIL = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
 
   has_many :posts, dependent: :destroy
-  has_many :images, as: :imageable
+  has_many :images, as: :imageable, dependent: :destroy
   has_many :memberships
   has_many :groups, through: :memberships
 
@@ -13,7 +13,7 @@ class User < ApplicationRecord
   scope :adults, -> { where('birthday < ?', 18.years.ago) }
 
   def full_name
-    "User name is: #{last_name} #{first_name}"
+    "#{last_name} #{first_name}"
   end
 
   def personal_data=(value)

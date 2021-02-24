@@ -1,7 +1,7 @@
 class Group < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :users, through: :memberships
-  has_many :images, as: :imageable
+  has_many :images, as: :imageable, dependent: :destroy
 
   has_many :banned_memberships, -> { where(status: :banned) }, class_name: 'Membership'
   has_many :banned_users, through: :banned_memberships, class_name: 'User', source: :user

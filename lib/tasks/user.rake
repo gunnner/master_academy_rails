@@ -11,7 +11,7 @@ namespace :user do
   task export: :environment do
     file = 'user_data.csv'
     users = User.order(:first_name)
-    headers = ['first_name', 'last_name', 'personal_data', 'password', 'email', 'birthday']
+    headers = %w[first_name last_name personal_data password email birthday]
 
     CSV.open(file, 'w', write_headers: true, headers: headers) do |writer|
       users.each do |user|
