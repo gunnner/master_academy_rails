@@ -12,7 +12,14 @@ gem 'sqlite3', '~> 1.4'
 gem 'puma', '~> 4.1'
 
 # gem 'rack-cors', :require => 'rack/cors'
+#
+# Admin panel
+gem 'activeadmin'
+gem 'devise'
 
+# Auth for api
+gem 'jwt'
+gem 'sorcery'
 # Use SCSS for stylesheets
 # gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -40,8 +47,10 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # gem 'rake', '~> 13.0', '>= 13.0.3'
 gem 'social-share-button'
 
+# API with Grape
 gem 'grape'
 gem 'grape-entity'
+gem 'grape-swagger'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+
+  authenticates_with_sorcery!
+
   VALID_EMAIL = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
 
   has_many :posts, dependent: :destroy

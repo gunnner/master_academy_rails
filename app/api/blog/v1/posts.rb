@@ -4,64 +4,50 @@ module Blog
 
       helpers Blog::Helpers::Posts
 
-      version 'v1', using: :path
-      format :json
-      prefix :api
-
-      resources :posts do
+      namespace :posts do
         desc 'Return the list of posts'
         get do
-          posts = Post.publish
-          present posts, with: Blog::Entities::Index
+          post = Post.published
+          present post, with: Blog::Entities::Post
         end
 
         desc 'Create a new post'
         params do
           requires :title, type: String
           requires :body, type: String
-          requires :published_at, type: String
+          requires :user_id, type: Integer
+          requires :images_attributes, type: Array do
+            requires :url, type: String
+          end
         end
         post do
-          Post.create!(declared_params)
+          post = User.find(params[:user_id]).posts.create!(params)
+          present post, with: Blog::Entities::Post
         end
 
         route_param :post_id do
           desc 'Return a specific post'
           get do
-            post = Post.find(params[:id])
-            present post, with: Blog::Entities::Index
+            post = Post.find(params[:post_id])
+            present post, with: Blog::Entities::Post
+          end
+
+          params do
+            requires :user_id
+            optional :title, type: String
+            optional :body, type: String
           end
 
           desc 'Update a specific post'
-          params do
-            requires :title, type: String
-            requires :body, type: String
-            requires :published_at, type: String
-          end
           patch do
-            Post.find(params[:id]).update(declared_params)
+            post = User.find(params[:user_id]).posts.find(params[:post_id])
+            post.update(declared_params)
           end
-        end
 
-        desc 'Delete a specific post'
-        delete do
-          post = Post.find(params[:id])
-          post.destroy
-        end
-      end
-
-      resources :images do
-        desc 'Create an image'
-        params do
-          requires :image, type: Hash do
-            requires :url, type: String, desc: 'New Image'
+          desc 'Delete a specific post'
+          delete do
+            User.find(params[:user_id]).posts.destroy(params[:post_id])
           end
-        end
-        post do
-          @post = Post.find(params[:id])
-          @image = Image.new(params[:url])
-          @image = @post.images.create!(params[:url])
-          @post.update(url: @image.url)
         end
       end
     end
